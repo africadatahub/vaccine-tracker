@@ -160,6 +160,9 @@ body {
   text-align: left;
   transform: translate(0, 3px);
 }
+.dummy {
+  font-size: 120px;
+}
 
 @media only screen and (max-width: 900px) {
   .cards {
