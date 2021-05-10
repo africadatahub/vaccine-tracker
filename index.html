@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div id="app">
+        <div class="container">
+            <div class="cards">
+                <div class="card" v-for="country in countries">
+                 <div class="card-border">
+                     
+                        <div class="card-header">
+                            <div class="card-flag">
+                                
+                                <img :src="countryData[country].flagImage">
+                            </div>
+                            <div class="card-title">{{ countryData[country].country }}</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="vaccinations-wrap">
+                                <div class="vaccinations" v-for="vacs in countryData[country].vaccinations">
+                                    <div class="vaccine-marker" :style="{ 'background': vacs.color } "></div>{{ vacs.vacName }}</div>
+                                </div>
+                            <div class="vaccination-detail">
+                                <div class="vaccination-deliveries">
+                                    <div class="vacc-number">{{ countryData[country].deliveries | formatNumber }}</div>
+                                    <div class="vacc-label">Total Vacc. Delivered</div>
+                                </div>
+                                <div class="vaccination-total">
+                                    <div class="vacc-number">{{ countryData[country].totalVaccinations | formatNumber }}</div>
+                                    <div class="vacc-label">Total Vacc. Administered</div>
+                                </div>
+    
+                                <div class="vaccination-ratio">
+                                    <div class="vaccination-ratio-blocks">
+                                        <div class="vaccination-ratio-left">{{ countryData[country].popRatio }}</div>
+                                        <div class="vaccination-ratio-right">Vaccinations/<br/>
+                                        100 people</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                 </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
