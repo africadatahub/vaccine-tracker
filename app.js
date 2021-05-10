@@ -36,7 +36,7 @@ const vm = new Vue({
   },
   methods: {
     async getIso() {
-      await fetch('http://api.mediahack.co.za/adh/iso-json.php')
+      await fetch('https://api.mediahack.co.za/adh/iso-json.php')
         .then((data) => data.json())
         .then((data) => {
           data.forEach((d) => {
@@ -45,23 +45,23 @@ const vm = new Vue({
         })
     },
     async getData() {
-      await fetch('http://api.mediahack.co.za/adh/populations-json.php')
+      await fetch('https://api.mediahack.co.za/adh/populations-json.php')
         .then((data) => data.json())
         .then((data) => {
           this.populations = data.filter((d) => d.continent === 'Africa')
         })
 
-      await fetch('http://api.mediahack.co.za/adh/vaccine-deliveries-json.php')
+      await fetch('https://api.mediahack.co.za/adh/vaccine-deliveries-json.php')
         .then((data) => data.json())
         .then((data) => {
           this.deliveries = data.filter((d) => d.continent === 'Africa')
         })
-      await fetch('http://api.mediahack.co.za/adh/covax-deliveries-json.php')
+      await fetch('https://api.mediahack.co.za/adh/covax-deliveries-json.php')
         .then((data) => data.json())
         .then((data) => {
           this.covax = data
         })
-      await fetch('http://api.mediahack.co.za/adh/countries-json.php')
+      await fetch('https://api.mediahack.co.za/adh/countries-json.php')
         .then((data) => data.json())
         .then((data) => {
           this.vaccinations = data.filter((d) => d.continent === 'Africa')
@@ -69,7 +69,7 @@ const vm = new Vue({
             ...new Set(this.vaccinations.map((x) => x.common_name)),
           ]
         })
-      await fetch('http://api.mediahack.co.za/adh/mhc-vaccinations.php')
+      await fetch('https://api.mediahack.co.za/adh/mhc-vaccinations.php')
         .then((data) => data.json())
         .then((data) => {
           this.data = data.sort((a, b) => (a.country > b.country ? 1 : -1))
