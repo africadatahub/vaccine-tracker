@@ -151,7 +151,7 @@ const vm = new Vue({
         cards.forEach((d) => {
           d.style.height = cardHeight + 'px'
         })
-      }, 500)
+      }, 1000)
     })
   },
 })

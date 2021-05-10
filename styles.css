@@ -5,6 +5,9 @@ body {
   margin: 0px;
   font-family: 'Roboto Condensed', Arial, Helvetica, sans-serif;
 }
+[v-cloak] {
+  display: none;
+}
 
 .container {
   width: 90%;
