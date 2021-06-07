@@ -72,8 +72,10 @@ const vm = new Vue({
       await fetch('https://api.mediahack.co.za/adh/mhc-vaccinations.php')
         .then((data) => data.json())
         .then((data) => {
-          this.data = data.sort((a, b) => (a.country > b.country ? 1 : -1))
-          this.countries = [...new Set(data.map((x) => x.iso_code))]
+          let newData = data.filter((d) => d.iso_code !== '')
+          this.data = newData.sort((a, b) => (a.country > b.country ? 1 : -1))
+
+          this.countries = [...new Set(newData.map((x) => x.iso_code))]
 
           this.countries.forEach((d) => {
             d.trim()
@@ -92,6 +94,9 @@ const vm = new Vue({
             })
 
             let countryDetails = data.filter((e) => e.iso_code === d)
+            if (countryDetails[0].iso_code === 'ZAF') {
+              console.log(countryDetails)
+            }
 
             let countryName = ''
             if (countryDetails[0].country == 'Democratic Republic of Congo') {
@@ -108,8 +113,10 @@ const vm = new Vue({
             })
 
             let pop = this.populations.filter((p) => p.iso_code === d)
+
             let popRatio =
-              (countryDetails[0].total_vaccine_doses_to_date /
+              (countryDetails[countryDetails.length - 1]
+                .total_vaccine_doses_to_date /
                 +pop[0].population) *
               100
 
@@ -118,7 +125,9 @@ const vm = new Vue({
               isoCode: d,
               isoCodeTwo: this.isoCodes[d]['alpha-2'],
               flagImage: this.isoCodes[d]['alpha-2'].toLowerCase() + '.png',
-              totalVaccinations: countryDetails[0].total_vaccine_doses_to_date,
+              totalVaccinations:
+                countryDetails[countryDetails.length - 1]
+                  .total_vaccine_doses_to_date,
               lastUpdate: countryDetails[0].date_of_report,
               allData: countryDetails,
               vaccinations: vs,
